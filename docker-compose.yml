@@ -27,3 +27,12 @@ services:
     restart: unless-stopped
     ports:
       - "82:8080"
+  payment_api:
+    build:
+      context: ./payment_api
+      dockerfile: Dockerfile
+    #image: nodejs
+    container_name: payment_api
+    restart: unless-stopped
+    ports:
+      - "83:8080"
