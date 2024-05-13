@@ -22,13 +22,14 @@ app.post('/payments', async(req, res)=>{
   try {
     const {code, loanCode, money, status} = req.body;
     
-    const loan=loanService.get(loanCode);
+    const loan=await loanService.get(loanCode);
+    console.log("LOAN", loan);
     if(!loan) throw ("LOAN_NOT_FOUND");
     if( loan.status!='PENDING') throw ("LOAN_NOT_PENDING");
 
     const payment = new payModel({code, loanCode, money, status });
     const data = await payment.save();
-    loanService.changeStatus('PAID');
+    await loanService.changeStatus(loanCode,'PAID');
     return res.status(201).json(data);
     
 

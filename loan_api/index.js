@@ -24,9 +24,10 @@ app.get('/loan/:code', async(req, res)=>{
   }
 });
 app.put('/loan/:code', async(req, res)=>{
-  let loan = await loanModel.find({code:req.params.code});
-  loan.status=req.body.status;
-  loan.save();
+  let loan = await loanModel
+      .findOneAndUpdate({code:req.params.code}, {status:'PAID'});
+  //loan.status=req.body.status;
+  //loan.save();
   return res.status(200).json(loan);
 });
 app.post('/loan', async(req, res)=>{
