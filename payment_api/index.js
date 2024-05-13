@@ -11,12 +11,12 @@ const { payModel } = require('./models');
 app.get('/', (req, res) => { res.send("I am alive payments"); })
 
 app.get('/payments', async(req, res)=>{
-  const loan = await loanModel.find({});
-  res.json( loan );
+  const list = await payModel.find({});
+  res.json( list );
 });
 app.get('/payments/:code', async(req, res)=>{
-  const loan = await payModel.find({code:req.params.code});
-  res.json( loan );
+  const payment = await payModel.find({code:req.params.code});
+  res.json( payment );
 });
 app.post('/payments', async(req, res)=>{
   try {

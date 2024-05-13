@@ -16,7 +16,12 @@ app.get('/loan', async(req, res)=>{
 });
 app.get('/loan/:code', async(req, res)=>{
   const loan = await loanModel.find({code:req.params.code});
-  res.json( loan );
+  try {
+    res.json( loan[0] );
+  } catch (error) {
+    console.log('Error', error);
+    return res.status(500).json({ message: 'Internal server error' });
+  }
 });
 app.put('/loan/:code', async(req, res)=>{
   let loan = await loanModel.find({code:req.params.code});
