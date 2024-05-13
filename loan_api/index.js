@@ -18,6 +18,12 @@ app.get('/loan/:code', async(req, res)=>{
   const loan = await loanModel.find({code:req.params.code});
   res.json( loan );
 });
+app.put('/loan/:code', async(req, res)=>{
+  let loan = await loanModel.find({code:req.params.code});
+  loan.status=req.body.status;
+  loan.save();
+  return res.status(200).json(loan);
+});
 app.post('/loan', async(req, res)=>{
   try {
     const {code, persontype, identitynumber, money, expire, status} = req.body;
