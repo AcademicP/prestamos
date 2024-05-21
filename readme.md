@@ -42,6 +42,7 @@ p11. Crear mi infra k8s:
 $ kubectl create -f ./deployment.yml
 $ kubectrl get pods
 $ kubectrl get deployments
-
-p12. FALTA. FALTA.
-REST. Event Driven.
+p12. crear el Service para acceder al publico.
+$ kubectl create -f ./service-nodeport.yml 
+p13. Verificar la direccion
+aws
