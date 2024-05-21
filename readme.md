@@ -44,3 +44,4 @@ $ kubectrl get pods
 $ kubectrl get deployments
 
 p12. FALTA. FALTA.
+REST. Event Driven.
