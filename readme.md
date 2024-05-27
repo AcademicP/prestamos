@@ -20,29 +20,46 @@ pm.test("La longitud de la respuesta debe ser mayor que cero", function () {
 Despliegue de microservicios en Kubernetes
 --------------
 
-p1. Tener cuenta AWS.
-p2. Instalar AWS-CLI.
-p3. enlazar mi usuario de AWS con el CLI de mi maquina.
-p4. servicio ElasticKubernetesService. crear cluster01. vpc:vpc-a60a53dd
-p5. Elastik Container Registry. Crear un repositorio de contenedores.
-p6. Crear la imagen de Docker en el repo:
-$ docker tag integracion_aplicaciones-loan_api:latest 710473750744.dkr.ecr.us-east-2.amazonaws.com/prestamos:latest
+* p1. Tener cuenta AWS.
+* p2. Instalar AWS-CLI.
+* p4. tener una Clave de Acceso de tu usuario.
+* p3. Enlazar mi usuario de AWS con el CLI de mi maquina.
+```bash
+aws configure
+```
+* p4. Elastik Container Registry. Crear un repositorio de contenedores.
+* p5. servicio ElasticKubernetesService. crear cluster01. vpc:vpc-a60a53dd
 
-p7. subir la imagen al ECR
-$ docker push 710473750744.dkr.ecr.us-east-2.amazonaws.com/integracion_aplicaciones-loan_api:latest
-$ docker push 710473750744.dkr.ecr.us-east-2.amazonaws.com/prestamos:latest
-
-p8. Crear Nodos en el Cluster.
-p9. Conexión con el contexto de mi kubernetes con el cluster en AWS.
-$ aws eks --region us-east-2 update-kubeconfig --name cluster01
-$ kubectl get-all 
-
-p10. crear un archivo deployment.yml con la configuración de despliegue.
-p11. Crear mi infra k8s:
+* p6.Autenticar en ECR
+```bash
+aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 710473750744.dkr.ecr.us-east-2.amazonaws.com
+```
+* p7. Crear la imagen de Docker en el repo:
+```bash
+docker tag integracion_aplicaciones-person_api:latest 710473750744.dkr.ecr.us-east-2.amazonaws.com/prestamosms:latest
+```
+* p8. subir la imagen al ECR
+```bash
+docker push 710473750744.dkr.ecr.us-east-2.amazonaws.com/integracion_aplicaciones-person_api:latest
+docker push 710473750744.dkr.ecr.us-east-2.amazonaws.com/prestamos:latest
+```
+* p9. Crear Nodos en el Cluster.
+* p10. Conexión con el contexto de mi kubernetes con el cluster en AWS.
+```bash
+aws eks --region us-east-2 update-kubeconfig --name LoanCluster
+kubectl get all 
+```
+* p11. Crear un archivo deployment.yml con la configuración de despliegue.
+* p12. Crear mi infra k8s:
+```bash
 $ kubectl create -f ./deployment.yml
 $ kubectrl get pods
 $ kubectrl get deployments
-p12. crear el Service para acceder al publico.
+```
+
+* p13. Crear el Service para acceder al publico.
+```bash
 $ kubectl create -f ./service-nodeport.yml 
 p13. Verificar la direccion
 aws
+```

@@ -11,5 +11,5 @@ spec:
     app: testing-kube-app
   ports:
     - protocol: TCP
-      port: 3000
+      port: 81
       nodePort: 30072

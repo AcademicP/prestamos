@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: testing-kube-container
-          image: "710473750744.dkr.ecr.us-east-2.amazonaws.com/prestamos"
+          image: "710473750744.dkr.ecr.us-east-2.amazonaws.com/prestamosms"
           imagePullPolicy: Always
           resources:
             limits:
@@ -32,6 +32,6 @@ spec:
           livenessProbe:
             httpGet:
               path: /healthcheck
-              port: 3000
+              port: 81
             initialDelaySeconds: 5
             periodSeconds: 5
