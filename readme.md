@@ -57,9 +57,14 @@ $ kubectrl get pods
 $ kubectrl get deployments
 ```
 
-* p13. Crear el Service para acceder al publico.
+* p13. Verificar la aplicacion por la url del Browser
+https://ace066e10cbdc446c90c4bed0b0ae4b2-1082294916.us-east-2.elb.amazonaws.com
+
+* p14 si haces algun cambio en las imagenes, para actualizar:
 ```bash
-$ kubectl create -f ./service-nodeport.yml 
-p13. Verificar la direccion
-aws
+$ kubectl apply -f ./deployment.yml
+```
+* p15 Para borrar recursos:
+```bash
+$ kubectl delete [resource_name]
 ```

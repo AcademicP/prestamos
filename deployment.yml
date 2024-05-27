@@ -1,3 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: testing-kube-app
+spec:
+  selector:
+    app: testing-kube-app
+  ports:
+    - port: 80
+      targetPort: 8080
+  type: LoadBalancer
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -22,16 +34,6 @@ spec:
         - name: testing-kube-container
           image: "710473750744.dkr.ecr.us-east-2.amazonaws.com/prestamosms"
           imagePullPolicy: Always
-          resources:
-            limits:
-              memory: 512Mi
-              cpu: "1"
-            requests:
-              memory: 128Mi
-              cpu: "0.2"
-          livenessProbe:
-            httpGet:
-              path: /healthcheck
-              port: 8080
-            initialDelaySeconds: 5
-            periodSeconds: 5
+          ports:
+            - containerPort: 8080
+          
