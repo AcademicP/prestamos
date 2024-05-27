@@ -1,0 +1,74 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: testing-kube-service-np
+  labels:
+    name: testing-kube-deploy
+    app: testing-kube-app
+spec:
+  type: NodePort
+  selector:
+    app: testing-kube-app
+  ports:
+    - protocol: TCP
+      port: 8080
+      nodePort: 30072
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: testing-kube-app-1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: testing-kube-app-1
+  template:
+    metadata:
+      labels:
+        app: testing-kube-app-1
+    spec:
+      containers:
+        - name: testing-kube-container-1
+          image: "710473750744.dkr.ecr.us-east-2.amazonaws.com/personapi"
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nodeport-2
+spec:
+  selector:
+    app: person-app-2
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8080
+    nodePort: 30073
+  type: NodePort
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: testing-kube-app-2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: testing-kube-app-2
+  template:
+    metadata:
+      labels:
+        app: testing-kube-app-2
+    spec:
+      containers:
+        - name: testing-kube-container-2
+          image: "710473750744.dkr.ecr.us-east-2.amazonaws.com/companyapi"
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080

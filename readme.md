@@ -66,5 +66,5 @@ $ kubectl apply -f ./deployment.yml
 ```
 * p15 Para borrar recursos:
 ```bash
-$ kubectl delete [resource_name]
+$ kubectl delete -f ./deployment.yml
 ```
