@@ -1,9 +1,10 @@
+# DOCKER GUIDE
 Para correr Docker con todas la solucion
--------------------------
+```bash
 docker-compose up --build
-
+```
 Para crear pruebas  del API en Postman:
-----------------------------
+```js
 pm.test("Estado 200 OK Al listar", function(){
     pm.response.to.have.status(200);
 });
@@ -14,22 +15,22 @@ pm.test("La longitud de la respuesta debe ser mayor que cero", function () {
     const responseData = pm.response.json();
     pm.expect(responseData.length).to.be.greaterThan(0, "La lista de empresas no debe estar vacía");
 });
+```
+# KUBERNETES GUIDE
 
-
-------
-Despliegue de microservicios en Kubernetes
+Despliegue de microservicios en Kubernetes AWS.
 --------------
-
-* p1. Tener cuenta AWS.
-* p2. Instalar AWS-CLI.
-* p4. tener una Clave de Acceso de tu usuario.
-* p3. Enlazar mi usuario de AWS con el CLI de mi maquina.
+1. Tener cuenta AWS.
+2. Instalar AWS-CLI.
+3. tener una clave de acceso de tu usuario.
+4. Enlazar mi usuario de AWS con el CLI de mi maquina.
 ```bash
 aws configure
 ```
-* p4. Elastik Container Registry. Crear un repositorio de contenedores.
-* p5. servicio ElasticKubernetesService. crear cluster01. vpc:vpc-a60a53dd
-
+4. Crear un repositorio de contenedores en AWS Elastik Container Registry.
+5. Crear un cluster en AWS Elastic Kubernetes Service
+Ejemplo:cluster01. vpc:vpc-a60a53dd
+6. Crear un grupo de nodos dentro del cluster.
 * p6.Autenticar en ECR
 ```bash
 aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 710473750744.dkr.ecr.us-east-2.amazonaws.com

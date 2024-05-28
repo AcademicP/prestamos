@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: testing-kube-app
+  name: person-kube-app
 spec:
   selector:
-    app: testing-kube-app
+    app: person-kube-app
   ports:
     - port: 80
       targetPort: 8080
@@ -13,25 +13,21 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: testing-kube-deploy
   labels:
-    name: testing-kube-deploy
-    app: testing-kube-app
+    name: person-kube-deploy
+    app: person-kube-app
 spec:
   replicas: 1
   selector:
     matchLabels:
-      name: testing-kube-pod
-      app: testing-kube-app
+      app: person-kube-app
   template:
     metadata:
-      name: testing-kube-pod
       labels:
-        name: testing-kube-pod
-        app: testing-kube-app
+        app: person-kube-app
     spec:
       containers:
-        - name: testing-kube-container
+        - name: person-kube-container
           image: "710473750744.dkr.ecr.us-east-2.amazonaws.com/prestamosms"
           imagePullPolicy: Always
           ports:
