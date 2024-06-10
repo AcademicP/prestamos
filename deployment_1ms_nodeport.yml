@@ -18,7 +18,9 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  name: person-kube-deploy
   labels:
+    name: person-kube-deploy
     app: testing-kube-app
 spec:
   replicas: 1
@@ -27,12 +29,13 @@ spec:
       app: testing-kube-app
   template:
     metadata:
+      name: person-kube-app
       labels:
         app: testing-kube-app
     spec:
       containers:
         - name: testing-kube-container
-          image: "710473750744.dkr.ecr.us-east-2.amazonaws.com/prestamosms"
+          image: "710473750744.dkr.ecr.us-east-2.amazonaws.com/personapi:latest"
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
