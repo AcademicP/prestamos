@@ -1,0 +1,139 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: person-kube-app
+spec:
+  selector:
+    app: person-kube-app
+  ports:
+    - port: 80
+      targetPort: 8080
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    name: person-kube-deploy
+    app: person-kube-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: person-kube-app
+  template:
+    metadata:
+      labels:
+        app: person-kube-app
+    spec:
+      containers:
+        - name: person-kube-container
+          image: "710473750744.dkr.ecr.us-east-2.amazonaws.com/person"
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: company-kube-app
+spec:
+  selector:
+    app: company-kube-app
+  ports:
+    - port: 81
+      targetPort: 8081
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    name: company-kube-deploy
+    app: company-kube-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: company-kube-app
+  template:
+    metadata:
+      labels:
+        app: company-kube-app
+    spec:
+      containers:
+        - name: company-kube-container
+          image: "710473750744.dkr.ecr.us-east-2.amazonaws.com/company"
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8081
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: loan-kube-app
+spec:
+  selector:
+    app: loan-kube-app
+  ports:
+    - port: 82
+      targetPort: 8082
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    name: loan-kube-deploy
+    app: loan-kube-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: loan-kube-app
+  template:
+    metadata:
+      labels:
+        app: loan-kube-app
+    spec:
+      containers:
+        - name: loan-kube-container
+          image: "710473750744.dkr.ecr.us-east-2.amazonaws.com/loan"
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8082
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: payment-kube-app
+spec:
+  selector:
+    app: payment-kube-app
+  ports:
+    - port: 83
+      targetPort: 8083
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    name: payment-kube-deploy
+    app: payment-kube-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: payment-kube-app
+  template:
+    metadata:
+      labels:
+        app: payment-kube-app
+    spec:
+      containers:
+        - name: payment-kube-container
+          image: "710473750744.dkr.ecr.us-east-2.amazonaws.com/payment"
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8083
